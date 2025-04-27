@@ -11,7 +11,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { Text } from '@/components/Themed';
-import { useRouter } from 'expo-router';
+import { useRouter, Stack } from 'expo-router';
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import Logo from '../constants/transparent_logo.png';
@@ -23,7 +23,6 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('');
 
   async function handleLogin() {
-    // Basic client-side validation
     if (!email.trim()) {
       Alert.alert('Email is required');
       return;
@@ -61,6 +60,9 @@ export default function LoginScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={80}
     >
+      {/* Hide default back arrow */}
+      <Stack.Screen options={{ headerBackVisible: false }} />
+
       <ScrollView
         contentContainerStyle={[
           styles.container,
@@ -119,7 +121,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 30,
-    paddingBottom: 60, // extra space at the very bottom
+    paddingBottom: 60,
   },
   logo: {
     width: 350,
@@ -142,13 +144,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   loginButton: {
-    backgroundColor: '#38b6ff', // Primary blue accent
+    backgroundColor: '#38b6ff',
     paddingVertical: 15,
     width: '100%',
     borderRadius: 10,
     alignItems: 'center',
     marginTop: 10,
-    marginBottom: 40, // pushes button up and adds space below
+    marginBottom: 40,
   },
   loginButtonText: {
     fontFamily: 'Poppins',
@@ -157,5 +159,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-
